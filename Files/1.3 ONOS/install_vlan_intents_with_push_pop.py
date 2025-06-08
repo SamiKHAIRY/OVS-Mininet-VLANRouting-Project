@@ -1,0 +1,24 @@
+import requests
+import json
+from requests.auth import HTTPBasicAuth
+
+onos_url = 'http://172.17.0.2:8181/onos/v1/intents'
+auth = HTTPBasicAuth('karaf', 'karaf')
+headers = {'Content-Type': 'application/json'}
+
+print('Installing VLAN 10 host → router (with VLAN_PUSH)')
+requests.post(onos_url, auth=auth, headers=headers, data=json.dumps({"type": "PointToPointIntent", "appId": "org.onosproject.cli", "priority": 300, "selector": {"criteria": [{"type": "ETH_TYPE", "ethType": "0x0800"}]}, "treatment": {"instructions": [{"type": "L2MODIFICATION", "subtype": "VLAN_PUSH", "ethernetType": "0x8100"}, {"type": "L2MODIFICATION", "subtype": "VLAN_ID", "vlanId": "10"}, {"type": "OUTPUT", "port": "3"}]}, "ingressPoint": {"device": "of:0000000000000001", "port": "2"}, "egressPoint": {"device": "of:0000000000000001", "port": "3"}}))
+print('Installing VLAN 10 router → host (with VLAN_POP)')
+requests.post(onos_url, auth=auth, headers=headers, data=json.dumps({"type": "PointToPointIntent", "appId": "org.onosproject.cli", "priority": 300, "selector": {"criteria": [{"type": "ETH_TYPE", "ethType": "0x0800"}, {"type": "VLAN_VID", "vlanId": "10"}]}, "treatment": {"instructions": [{"type": "L2MODIFICATION", "subtype": "VLAN_POP"}, {"type": "OUTPUT", "port": "2"}]}, "ingressPoint": {"device": "of:0000000000000001", "port": "3"}, "egressPoint": {"device": "of:0000000000000001", "port": "2"}}))
+print('Installing VLAN 20 host → router (with VLAN_PUSH)')
+requests.post(onos_url, auth=auth, headers=headers, data=json.dumps({"type": "PointToPointIntent", "appId": "org.onosproject.cli", "priority": 300, "selector": {"criteria": [{"type": "ETH_TYPE", "ethType": "0x0800"}]}, "treatment": {"instructions": [{"type": "L2MODIFICATION", "subtype": "VLAN_PUSH", "ethernetType": "0x8100"}, {"type": "L2MODIFICATION", "subtype": "VLAN_ID", "vlanId": "20"}, {"type": "OUTPUT", "port": "3"}]}, "ingressPoint": {"device": "of:0000000000000002", "port": "2"}, "egressPoint": {"device": "of:0000000000000002", "port": "3"}}))
+print('Installing VLAN 20 router → host (with VLAN_POP)')
+requests.post(onos_url, auth=auth, headers=headers, data=json.dumps({"type": "PointToPointIntent", "appId": "org.onosproject.cli", "priority": 300, "selector": {"criteria": [{"type": "ETH_TYPE", "ethType": "0x0800"}, {"type": "VLAN_VID", "vlanId": "20"}]}, "treatment": {"instructions": [{"type": "L2MODIFICATION", "subtype": "VLAN_POP"}, {"type": "OUTPUT", "port": "2"}]}, "ingressPoint": {"device": "of:0000000000000002", "port": "3"}, "egressPoint": {"device": "of:0000000000000002", "port": "2"}}))
+print('Installing VLAN 30 host → router (with VLAN_PUSH)')
+requests.post(onos_url, auth=auth, headers=headers, data=json.dumps({"type": "PointToPointIntent", "appId": "org.onosproject.cli", "priority": 300, "selector": {"criteria": [{"type": "ETH_TYPE", "ethType": "0x0800"}]}, "treatment": {"instructions": [{"type": "L2MODIFICATION", "subtype": "VLAN_PUSH", "ethernetType": "0x8100"}, {"type": "L2MODIFICATION", "subtype": "VLAN_ID", "vlanId": "30"}, {"type": "OUTPUT", "port": "3"}]}, "ingressPoint": {"device": "of:0000000000000003", "port": "2"}, "egressPoint": {"device": "of:0000000000000003", "port": "3"}}))
+print('Installing VLAN 30 router → host (with VLAN_POP)')
+requests.post(onos_url, auth=auth, headers=headers, data=json.dumps({"type": "PointToPointIntent", "appId": "org.onosproject.cli", "priority": 300, "selector": {"criteria": [{"type": "ETH_TYPE", "ethType": "0x0800"}, {"type": "VLAN_VID", "vlanId": "30"}]}, "treatment": {"instructions": [{"type": "L2MODIFICATION", "subtype": "VLAN_POP"}, {"type": "OUTPUT", "port": "2"}]}, "ingressPoint": {"device": "of:0000000000000003", "port": "3"}, "egressPoint": {"device": "of:0000000000000003", "port": "2"}}))
+print('Installing VLAN 40 host → router (with VLAN_PUSH)')
+requests.post(onos_url, auth=auth, headers=headers, data=json.dumps({"type": "PointToPointIntent", "appId": "org.onosproject.cli", "priority": 300, "selector": {"criteria": [{"type": "ETH_TYPE", "ethType": "0x0800"}]}, "treatment": {"instructions": [{"type": "L2MODIFICATION", "subtype": "VLAN_PUSH", "ethernetType": "0x8100"}, {"type": "L2MODIFICATION", "subtype": "VLAN_ID", "vlanId": "40"}, {"type": "OUTPUT", "port": "3"}]}, "ingressPoint": {"device": "of:0000000000000004", "port": "2"}, "egressPoint": {"device": "of:0000000000000004", "port": "3"}}))
+print('Installing VLAN 40 router → host (with VLAN_POP)')
+requests.post(onos_url, auth=auth, headers=headers, data=json.dumps({"type": "PointToPointIntent", "appId": "org.onosproject.cli", "priority": 300, "selector": {"criteria": [{"type": "ETH_TYPE", "ethType": "0x0800"}, {"type": "VLAN_VID", "vlanId": "40"}]}, "treatment": {"instructions": [{"type": "L2MODIFICATION", "subtype": "VLAN_POP"}, {"type": "OUTPUT", "port": "2"}]}, "ingressPoint": {"device": "of:0000000000000004", "port": "3"}, "egressPoint": {"device": "of:0000000000000004", "port": "2"}}))
